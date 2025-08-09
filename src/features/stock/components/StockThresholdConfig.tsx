@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Settings, Save, RotateCcw } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Input, Label } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button, Input, Label } from '../../../shared/components/ui';
 import { StockThresholds } from '../hooks/useStockLevels';
 import { toast } from 'sonner';
 

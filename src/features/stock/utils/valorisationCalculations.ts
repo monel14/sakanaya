@@ -1,4 +1,4 @@
-import { StockMovement, StockLevel } from '@/features/stock/types';
+import { StockMovement, StockLevel } from '../types';
 
 // Valorisation methods
 export type ValorisationMethod = 'fifo' | 'lifo' | 'average' | 'standard';

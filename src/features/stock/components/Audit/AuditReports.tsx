@@ -25,7 +25,7 @@ import {
   AuditReportFilters,
   auditService,
   auditReportGenerator
-} from '../../services/auditService';
+} from '../../shared/services/auditService';
 
 interface AuditReportsProps {
   userRole: 'director' | 'manager';

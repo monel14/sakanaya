@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BonReceptionPage } from '../pages/BonReceptionPage';
 import { BonReceptionValidationDemo } from './BonReceptionValidationDemo';
-import { Button } from '@/components/ui';
+import { Button } from '../../../shared/components/ui';
 
 /**
  * Démonstration du nouveau système de Bon de Réception

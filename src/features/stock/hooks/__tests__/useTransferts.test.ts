@@ -3,8 +3,8 @@ import { renderHook, act, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 import { useTransferts } from '../useTransferts';
-import { transfertService } from '../../services/transfertService';
-import { TransfertStatus } from '../../types';
+import { transfertService } from '../../shared/services/transfertService';
+import { TransfertStatus } from '../../shared/types';
 
 // Mock the transfert service
 vi.mock('../../services/transfertService', () => ({

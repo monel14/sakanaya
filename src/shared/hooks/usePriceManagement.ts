@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Product, PriceHistory } from '@/features/sales/types';
-import { productService } from '@/shared/services';
+import { Product, PriceHistory } from '../../features/sales/types';
+import { productService } from '../services';
 import { toast } from 'sonner';
 
 export interface UsePriceManagementReturn {

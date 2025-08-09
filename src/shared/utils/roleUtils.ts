@@ -1,29 +1,29 @@
 import React from 'react';
 
 // Import des pages par rôle selon les requirements
-import { DirectorDashboard } from '../features/director/pages/DirectorDashboard';
-import { DirectorReports } from '../features/director/pages/DirectorReports';
-import { StoreManagement } from '../features/director/pages/StoreManagement';
-import { StockManagement } from '../features/director/pages/StockManagement';
-import { ProductCatalog } from '../features/director/pages/ProductCatalog';
-import { EmployeeManagement } from '../features/director/pages/EmployeeManagement';
-import { SalesValidation } from '../features/director/pages/SalesValidation';
+import { DirectorDashboard } from '../../features/director/pages/DirectorDashboard';
+import { DirectorReports } from '../../features/director/pages/DirectorReports';
+import { StoreManagement } from '../../features/director/pages/StoreManagement';
+import { StockManagement } from '../../features/director/pages/StockManagement';
+import { ProductCatalog } from '../../features/director/pages/ProductCatalog';
+import { EmployeeManagement } from '../../features/director/pages/EmployeeManagement';
+import { SalesValidation } from '../../features/director/pages/SalesValidation';
 
 // Import des nouvelles pages de stock
-import { BonReceptionDemo } from '../features/stock/demo/BonReceptionDemo';
-import { SimpleTransfertManagement as TransfertManagement } from '../features/director/pages/SimpleTransfertManagement';
-import { SimpleInventaireManagement as InventaireManagement } from '../features/director/pages/SimpleInventaireManagement';
-import { SimpleTraceabilityManagement as TraceabilityManagement } from '../features/director/pages/SimpleTraceabilityManagement';
+import { BonReceptionDemo } from '../../features/stock/demo/BonReceptionDemo';
+import { SimpleTransfertManagement as TransfertManagement } from '../../features/director/pages/SimpleTransfertManagement';
+import { SimpleInventaireManagement as InventaireManagement } from '../../features/director/pages/SimpleInventaireManagement';
+import { SimpleTraceabilityManagement as TraceabilityManagement } from '../../features/director/pages/SimpleTraceabilityManagement';
 
-import { ManagerDashboard } from '../features/manager/pages/ManagerDashboard';
-import { SalesEntry } from '../features/manager/pages/ManagerSales';
-import { ManagerStock } from '../features/manager/pages/ManagerStock';
-import { SimpleManagerTransferts as ManagerTransferts } from '../features/manager/pages/SimpleManagerTransferts';
-import { SimpleManagerInventaire as ManagerInventaire } from '../features/manager/pages/SimpleManagerInventaire';
+import { ManagerDashboard } from '../../features/manager/pages/ManagerDashboard';
+import { SalesEntry } from '../../features/manager/pages/ManagerSales';
+import { ManagerStock } from '../../features/manager/pages/ManagerStock';
+import { SimpleManagerTransferts as ManagerTransferts } from '../../features/manager/pages/SimpleManagerTransferts';
+import { SimpleManagerInventaire as ManagerInventaire } from '../../features/manager/pages/SimpleManagerInventaire';
 
-import { AdminUsers } from '../features/admin/pages/AdminUsers';
-import { UserProfile } from '../features/common/pages/UserProfile';
-import { NotFound } from '../features/common/pages/NotFound';
+import { AdminUsers } from '../../features/admin/pages/AdminUsers';
+import { UserProfile } from '../../features/common/pages/UserProfile';
+import { NotFound } from '../../features/common/pages/NotFound';
 
 // Types pour les rôles selon les requirements
 export type UserRole = 'director' | 'manager';

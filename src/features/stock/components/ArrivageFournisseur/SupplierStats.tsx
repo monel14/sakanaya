@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supplierService } from '../../services/supplierService';
+import { supplierService } from '../../shared/services/supplierService';
 
 interface SupplierStatsData {
   total: number;

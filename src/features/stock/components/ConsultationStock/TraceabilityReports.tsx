@@ -15,10 +15,10 @@ import {
   Eye,
   Building2
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Badge } from '@/components/ui';
-import { MouvementStock, Product } from '../../types';
-import { stockService } from '@/shared/services';
-import { productService } from '@/shared/services';
+import { Card, CardHeader, CardTitle, CardContent, Button, Badge } from '../../../../shared/components/ui';
+import { MouvementStock, Product } from '../../shared/types';
+import { stockService } from '../../../../shared/services';
+import { productService } from '../../../../shared/services';
 import { toast } from 'sonner';
 
 interface TraceabilityReportsProps {

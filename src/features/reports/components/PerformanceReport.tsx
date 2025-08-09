@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button } from '../../../shared/components/ui';
 import { Download, Users, TrendingUp, Award, Target } from 'lucide-react';
 import { reportsService } from '../services/reportsService';
 import { PerformanceReportData, ReportFilters } from '../types';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search, FileText, TrendingUp } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../components/ui/Tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../shared/components/ui/Tabs';
 
 // Import des composants de traçabilité
 import { TraceabilityReports } from '../../stock/components/ConsultationStock/TraceabilityReports';

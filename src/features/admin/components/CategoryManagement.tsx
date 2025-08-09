@@ -14,7 +14,7 @@ import {
   DialogTrigger,
   Input,
   Textarea
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useProductCatalog } from '../hooks/useProductCatalog';
 
 interface CategoryFormData {

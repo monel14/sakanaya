@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PayrollSummary as PayrollSummaryType } from '../types';
-import { useSalaryManagement } from '@/shared/hooks/useEmployees';
+import { useSalaryManagement } from '../../../shared/hooks/useEmployees';
 import {
   Card,
   CardHeader,
@@ -18,7 +18,7 @@ import {
   TableHeader,
   TableRow,
   Button
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { FileText, Download, TrendingUp, TrendingDown, DollarSign, Users } from 'lucide-react';
 
 interface PayrollSummaryProps {

@@ -1,4 +1,4 @@
-import { DailySales } from '@/features/sales/types';
+import { DailySales } from '../../features/sales/types';
 import { NotificationService } from './notificationService';
 
 interface AuditLogEntry {

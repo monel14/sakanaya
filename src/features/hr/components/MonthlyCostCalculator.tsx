@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSalaryManagement } from '@/shared/hooks/useEmployees';
+import { useSalaryManagement } from '../../../shared/hooks/useEmployees';
 import {
   Card,
   CardHeader,
@@ -16,7 +16,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { Calculator, TrendingUp, TrendingDown } from 'lucide-react';
 
 interface MonthlyCostCalculatorProps {

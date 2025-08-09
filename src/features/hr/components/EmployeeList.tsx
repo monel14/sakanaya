@@ -31,7 +31,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { Search, MoreHorizontal, Edit, UserX, Trash2 } from 'lucide-react';
 
 interface EmployeeListProps {

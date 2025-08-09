@@ -1,6 +1,6 @@
 import React from 'react';
 import { AlertTriangle, TrendingDown, TrendingUp, Package } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Badge } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Badge } from '../../../shared/components/ui';
 import { StockAlert } from '../hooks/useStockLevels';
 
 interface StockAlertsProps {

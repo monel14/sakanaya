@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, CheckCircle, Trash2, AlertCircle, Info, Save } from 'lucide-react';
-import { Card, CardContent, Button, Input, Label } from '@/components/ui';
-import { User, SalesEntry as SalesEntryType, Product, DailySales } from '@/types';
-import { usePriceManagement, useAutoSave } from '@/shared/hooks';
-import { cn } from '@/shared/lib/utils';
+import { Card, CardContent, Button, Input, Label } from '../../../shared/components/ui';
+import { User, SalesEntry as SalesEntryType, Product, DailySales } from '../../../shared/types';
+import { usePriceManagement, useAutoSave } from '../../../shared/hooks';
+import { cn } from '../../../shared/lib/utils';
 import { toast } from 'sonner';
 
 interface SalesEntryProps {

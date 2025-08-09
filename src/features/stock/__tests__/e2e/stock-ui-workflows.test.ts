@@ -6,16 +6,16 @@ import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 
 // Import des composants UI
-import { StockManagementPage } from '../../components/StockManagementPage';
-import { BonReceptionForm } from '../../components/ArrivageFournisseur/BonReceptionForm';
-import { BonReceptionList } from '../../components/ArrivageFournisseur/BonReceptionList';
-import { TransfertForm } from '../../components/Transfert/TransfertForm';
-import { TransfertList } from '../../components/Transfert/TransfertList';
-import { ReceptionForm } from '../../components/Transfert/ReceptionForm';
-import { InventaireForm } from '../../components/Inventaire/InventaireForm';
-import { InventaireList } from '../../components/Inventaire/InventaireList';
-import { StockDirectorView } from '../../components/ConsultationStock/StockDirectorView';
-import { MobileStockManagement } from '../../components/mobile/MobileStockManagement';
+import { StockManagementPage } from '../../shared/components/StockManagementPage';
+import { BonReceptionForm } from '../../shared/components/ArrivageFournisseur/BonReceptionForm';
+import { BonReceptionList } from '../../shared/components/ArrivageFournisseur/BonReceptionList';
+import { TransfertForm } from '../../shared/components/Transfert/TransfertForm';
+import { TransfertList } from '../../shared/components/Transfert/TransfertList';
+import { ReceptionForm } from '../../shared/components/Transfert/ReceptionForm';
+import { InventaireForm } from '../../shared/components/Inventaire/InventaireForm';
+import { InventaireList } from '../../shared/components/Inventaire/InventaireList';
+import { StockDirectorView } from '../../shared/components/ConsultationStock/StockDirectorView';
+import { MobileStockManagement } from '../../shared/components/mobile/MobileStockManagement';
 
 // Mock des services
 vi.mock('../../services/stockService');

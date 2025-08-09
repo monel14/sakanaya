@@ -8,8 +8,8 @@ import {
   Package,
   UserCheck
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '@/components/ui';
-import { User } from '@/types';
+import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '../../../shared/components/ui';
+import { User } from '../../../shared/types';
 
 interface ManagerDashboardProps {
   currentUser: User | null;

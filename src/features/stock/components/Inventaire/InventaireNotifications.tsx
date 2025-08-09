@@ -8,7 +8,7 @@ import {
   X,
   CheckCircle
 } from 'lucide-react';
-import { Inventaire } from '../../types';
+import { Inventaire } from '../../shared/types';
 
 interface InventaireNotificationsProps {
   pendingInventaires: Inventaire[];

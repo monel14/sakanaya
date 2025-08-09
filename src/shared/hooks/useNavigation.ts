@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { ViewType } from '@/types';
+import { ViewType } from '../types';
 
 interface UseNavigationReturn {
   activeView: ViewType;

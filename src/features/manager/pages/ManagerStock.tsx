@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Package, Truck, AlertTriangle, CheckCircle, Plus, Trash2 } from 'lucide-react';
-import { Modal, ModalBody, ModalFooter } from '../../../components/ui/Modal';
+import { Modal, ModalBody, ModalFooter } from '../../../shared/components/ui/Modal';
 
 interface ManagerStockProps {
   user: any;

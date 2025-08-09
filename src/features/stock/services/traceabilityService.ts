@@ -1,7 +1,7 @@
 import { MouvementStock } from '../types';
-import { Product } from '@/features/sales/types';
-import { stockService } from '@/shared/services';
-import { productService } from '@/shared/services';
+import { Product } from '../../sales/types';
+import { stockService } from '../../../shared/services';
+import { productService } from '../../../shared/services';
 
 export interface TraceabilityFilters {
   dateRange?: {

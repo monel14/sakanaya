@@ -6,10 +6,10 @@ import {
   DialogHeader,
   DialogTitle,
   Button
-} from '@/components/ui';
-import { Product, PriceHistory } from '@/types';
-import { usePriceManagement } from '@/shared/hooks';
-import { cn } from '@/shared/lib/utils';
+} from '../../../shared/components/ui';
+import { Product, PriceHistory } from '../../../shared/types';
+import { usePriceManagement } from '../../../shared/hooks';
+import { cn } from '../../../shared/lib/utils';
 
 interface PriceHistoryModalProps {
   product: Product | null;

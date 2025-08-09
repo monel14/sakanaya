@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Package, AlertTriangle, TrendingUp, TrendingDown, BarChart3 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button } from '../../../shared/components/ui';
 import { ArrivalEntry } from './ArrivalEntry';
 import { LossEntry } from './LossEntry';
 import { StockLevelDisplay } from './StockLevelDisplay';
 import { StockMovement } from '../types';
-import { stockService } from '@/shared/services';
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { stockService } from '../../../shared/services';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { toast } from 'sonner';
 
 type TabType = 'arrivals' | 'losses' | 'overview' | 'levels';

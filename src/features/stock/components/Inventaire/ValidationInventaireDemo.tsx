@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Package, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
 import { ValidationInventaire } from './ValidationInventaire';
 import { InventaireNotifications } from './InventaireNotifications';
-import { useInventaire } from '../../hooks/useInventaire';
-import { Inventaire } from '../../types';
+import { useInventaire } from '../../shared/hooks/useInventaire';
+import { Inventaire } from '../../shared/types';
 
 interface ValidationInventaireDemoProps {
   userRole?: 'director';

@@ -28,10 +28,10 @@ import {
   TableHeader,
   TableRow,
   Badge
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { StockMovement } from '../types';
-import { stockService } from '@/shared/services';
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { stockService } from '../../../shared/services';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { toast } from 'sonner';
 
 // Schema for loss entry form

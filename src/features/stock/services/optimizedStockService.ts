@@ -5,7 +5,7 @@ import {
   BonReception,
   TransfertStock,
   Inventaire
-} from '@/features/stock/types';
+} from '../types';
 
 // Cache configuration
 interface CacheConfig {

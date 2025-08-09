@@ -10,7 +10,7 @@ import {
   RefreshCw,
   Download
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '../../../shared/components/ui';
 import { useCostAnalysis } from '../../../shared/hooks/useCostAnalysis';
 import { CostRatiosChart } from './CostRatiosChart';
 import { StoreComparisonTable } from './StoreComparisonTable';

@@ -14,7 +14,7 @@ import {
   Trash2,
   AlertCircle
 } from 'lucide-react';
-import { BonReception, Supplier, LigneReception } from '../../types';
+import { BonReception, Supplier, LigneReception } from '../../shared/types';
 
 // Schema de validation pour le formulaire
 const BonReceptionFormSchema = z.object({

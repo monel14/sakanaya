@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, Clock, User, Calendar, MessageSquare, AlertTriangle } from 'lucide-react';
-import { Card, CardContent, Button, Input } from '@/components/ui';
-import { DailySales, Product } from '@/types';
+import { Card, CardContent, Button, Input } from '../../../shared/components/ui';
+import { DailySales, Product } from '../../../shared/types';
 import { toast } from 'sonner';
 
 interface ValidationCardProps {

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Package, Users, Calendar, AlertTriangle } from 'lucide-react';
 import { InventaireForm } from './InventaireForm';
 import { ComptageSheet } from './ComptageSheet';
-import { useInventaire } from '../../hooks/useInventaire';
-import { CreateInventaireData } from '../../services/inventaireService';
+import { useInventaire } from '../../shared/hooks/useInventaire';
+import { CreateInventaireData } from '../../shared/services/inventaireService';
 
 interface InventaireDemoProps {
   userRole?: 'director' | 'manager';

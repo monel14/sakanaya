@@ -10,11 +10,11 @@ import {
     Download,
     Filter
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Badge } from '@/components/ui';
-import { StockLevel } from '../../types';
-import { Product } from '@/features/sales/types';
-import { stockService } from '@/shared/services';
-import { productService } from '@/shared/services';
+import { Card, CardHeader, CardTitle, CardContent, Button, Badge } from '../../../../shared/components/ui';
+import { StockLevel } from '../../shared/types';
+import { Product } from '../../../sales/types';
+import { stockService } from '../../../../shared/services';
+import { productService } from '../../../../shared/services';
 import { toast } from 'sonner';
 import { StockFilters, StockFilterOptions } from './StockFilters';
 

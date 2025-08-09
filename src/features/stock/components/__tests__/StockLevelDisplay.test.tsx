@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { StockLevelDisplay } from '../StockLevelDisplay';
-import { useStockLevels } from '../../hooks/useStockLevels';
+import { useStockLevels } from '../../shared/hooks/useStockLevels';
 
 // Mock the hook
 vi.mock('../../hooks/useStockLevels', () => ({

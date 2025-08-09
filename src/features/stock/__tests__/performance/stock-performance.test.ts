@@ -2,10 +2,10 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { performance } from 'perf_hooks';
 
 // Import des services
-import { stockService } from '../../services/stockService';
-import { transfertService } from '../../services/transfertService';
-import { inventaireService } from '../../services/inventaireService';
-import { supplierService } from '../../services/supplierService';
+import { stockService } from '../../shared/services/stockService';
+import { transfertService } from '../../shared/services/transfertService';
+import { inventaireService } from '../../shared/services/inventaireService';
+import { supplierService } from '../../shared/services/supplierService';
 
 // Types
 import type { 
@@ -14,7 +14,7 @@ import type {
   BonReception, 
   TransfertStock,
   Inventaire
-} from '../../types';
+} from '../../shared/types';
 
 // Mock des services avec simulation de latence
 vi.mock('../../services/stockService');

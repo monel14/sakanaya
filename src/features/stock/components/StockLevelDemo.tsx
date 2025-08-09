@@ -3,7 +3,7 @@ import { StockLevelDisplay } from './StockLevelDisplay';
 import { StockAlerts } from './StockAlerts';
 import { StockThresholdConfig } from './StockThresholdConfig';
 import { useStockLevels, StockThresholds } from '../hooks/useStockLevels';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../shared/components/ui';
 
 /**
  * Demo component to showcase the real-time stock level functionality

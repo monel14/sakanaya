@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Settings, Users, Store, Package } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button } from '../../../shared/components/ui';
 import { UserManagement } from './UserManagement';
 import { StoreManagement } from './StoreManagement';
 import { ProductCatalog } from './ProductCatalog';

@@ -7,7 +7,7 @@ import {
   CardContent, 
   Button,
   Badge
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useProductCatalog } from '../hooks/useProductCatalog';
 import { Product, PriceHistory } from '../../sales/types';
 

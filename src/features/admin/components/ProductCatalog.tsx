@@ -16,7 +16,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useProductCatalog } from '../hooks/useProductCatalog';
 import { ProductCreationForm } from './ProductCreationForm';
 import { ProductEditForm } from './ProductEditForm';

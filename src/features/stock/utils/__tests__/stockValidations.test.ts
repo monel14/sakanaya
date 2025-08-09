@@ -10,7 +10,7 @@ import {
   StockValidationError,
   StockValidationErrorType
 } from '../stockValidations';
-import { BonReception, Supplier, TransfertStock, StockLevel } from '../../types';
+import { BonReception, Supplier, TransfertStock, StockLevel } from '../../shared/types';
 
 describe('StockValidations', () => {
   describe('validateQuantity', () => {

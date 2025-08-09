@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SalaryAdjustment } from '../types';
-import { useSalaryManagement } from '@/shared/hooks/useEmployees';
+import { useSalaryManagement } from '../../../shared/hooks/useEmployees';
 import {
   Dialog,
   DialogContent,
@@ -20,7 +20,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { History, TrendingUp, TrendingDown } from 'lucide-react';
 
 interface SalaryAdjustmentHistoryProps {

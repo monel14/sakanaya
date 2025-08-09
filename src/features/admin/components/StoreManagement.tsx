@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useStoreManagement } from '../hooks/useStoreManagement';
 import { StoreCreationForm } from './StoreCreationForm';
 import { StoreEditForm } from './StoreEditForm';

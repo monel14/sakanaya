@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Package, TrendingUp, TrendingDown, Filter, Download, Search } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Badge, Input } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button, Badge, Input } from '../../../shared/components/ui';
 import { StockMovement } from '../types';
-import { Product } from '@/features/sales/types';
-import { stockService, productService } from '@/shared/services';
+import { Product } from '../../sales/types';
+import { stockService, productService } from '../../../shared/services';
 import { toast } from 'sonner';
 
 interface StockMovementHistoryProps {

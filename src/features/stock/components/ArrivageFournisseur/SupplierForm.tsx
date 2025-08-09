@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Supplier } from '../../types';
-import { supplierService, CreateSupplierData, UpdateSupplierData } from '../../services/supplierService';
+import { Supplier } from '../../shared/types';
+import { supplierService, CreateSupplierData, UpdateSupplierData } from '../../shared/services/supplierService';
 
 // Form validation schema
 const SupplierFormSchema = z.object({

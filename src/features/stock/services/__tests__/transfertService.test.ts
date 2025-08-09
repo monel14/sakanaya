@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { transfertService, CreateTransfertData, ReceptionData } from '../transfertService';
-import { TransfertStock, TransfertStatus } from '../../types';
+import { TransfertStock, TransfertStatus } from '../../shared/types';
 
 // Mock the MCP Supabase calls
 vi.mock('@/lib/mcp', () => ({

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, Label } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Label } from '../../../shared/components/ui';
 import { FileText, Users, TrendingUp } from 'lucide-react';
 import { SalesReport } from './SalesReport';
 import { PerformanceReport } from './PerformanceReport';

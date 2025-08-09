@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { StockLevel } from '../types';
-import { Product } from '@/features/sales/types';
-import { stockService } from '@/shared/services';
-import { productService } from '@/shared/services';
+import { Product } from '../../sales/types';
+import { stockService } from '../../../shared/services';
+import { productService } from '../../../shared/services';
 
 export interface EnrichedStockLevel extends StockLevel {
   product: Product;

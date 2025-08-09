@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
   Button
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useStoreManagement } from '../hooks/useStoreManagement';
 import { Store } from '../../../shared/types';
 

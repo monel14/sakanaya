@@ -12,7 +12,7 @@ import {
   DollarSign,
   BarChart3
 } from 'lucide-react';
-import { Inventaire } from '../../types';
+import { Inventaire } from '../../shared/types';
 
 interface ValidationInventaireProps {
   inventaire: Inventaire;

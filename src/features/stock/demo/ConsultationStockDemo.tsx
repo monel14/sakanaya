@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button } from '../../../shared/components/ui';
 import { StockDirectorView } from '../components/ConsultationStock/StockDirectorView';
 import { StockHistory } from '../components/ConsultationStock/StockHistory';
 import { StockLevelDisplay } from '../components/StockLevelDisplay';

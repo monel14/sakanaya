@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
   Checkbox
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 
 interface EmployeeFormProps {
   employee?: Employee;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Package, Truck, Plus, Eye, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../components/ui/Tabs';
-import { Modal, ModalBody, ModalFooter } from '../../../components/ui/Modal';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../shared/components/ui/Tabs';
+import { Modal, ModalBody, ModalFooter } from '../../../shared/components/ui/Modal';
 import { BonReceptionFormInline } from '../../stock/components/BonReceptionFormInline';
 import { SimpleBonReception } from '../../stock/services/simpleBonReceptionService';
 

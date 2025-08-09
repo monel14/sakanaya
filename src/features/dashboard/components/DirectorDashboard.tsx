@@ -9,8 +9,8 @@ import {
   Bell,
   Calculator
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '@/components/ui';
-import { KPIData } from '@/types';
+import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '../../../shared/components/ui';
+import { KPIData } from '../../../shared/types';
 import { CostAnalysis } from './CostAnalysis';
 
 // Mock data

@@ -1,18 +1,18 @@
 import React from 'react';
-import { useAuth } from './context/AuthContext';
-import { useNavigation } from './context/NavigationContext';
-import { useUI } from './context/UIContext';
-import { useNotifications } from './context/NotificationContext';
+import { useAuth } from './shared/context/AuthContext';
+import { useNavigation } from './shared/context/NavigationContext';
+import { useUI } from './shared/context/UIContext';
+import { useNotifications } from './shared/context/NotificationContext';
 
 // Components
-import { Loader } from './components/common/Loader';
-import { Header } from './components/layout/Header';
-import { Sidebar } from './components/layout/Sidebar';
-import { NotificationContainer } from './components/notifications/NotificationContainer';
+import { Loader } from './shared/components/common/Loader';
+import { Header } from './shared/components/layout/Header';
+import { Sidebar } from './shared/components/layout/Sidebar';
+import { NotificationContainer } from './shared/components/notifications/NotificationContainer';
 
 // Features
 import { LoginPage } from './features/auth/pages/LoginPage';
-import { getPageByRole } from './utils/roleUtils';
+import { getPageByRole } from './shared/utils/roleUtils';
 
 export const App: React.FC = () => {
   const { currentUser, loading } = useAuth();

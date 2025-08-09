@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Package, AlertTriangle, TrendingUp, TrendingDown, RefreshCw, Filter, History, Settings, Search, Calendar, BarChart3 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Badge, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button, Badge, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../shared/components/ui';
 import { StockLevel, StockMovement } from '../types';
-import { Product } from '@/features/sales/types';
-import { stockService } from '@/shared/services';
-import { productService } from '@/shared/services';
+import { Product } from '../../sales/types';
+import { stockService } from '../../../shared/services';
+import { productService } from '../../../shared/services';
 import { toast } from 'sonner';
 
 interface StockLevelDisplayProps {

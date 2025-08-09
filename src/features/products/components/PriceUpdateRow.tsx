@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { History, Check, X, AlertCircle } from 'lucide-react';
-import { Button, Input, Label } from '@/components/ui';
-import { Product } from '@/types';
-import { cn } from '@/shared/lib/utils';
+import { Button, Input, Label } from '../../../shared/components/ui';
+import { Product } from '../../../shared/types';
+import { cn } from '../../../shared/lib/utils';
 
 interface PriceUpdateRowProps {
   product: Product;

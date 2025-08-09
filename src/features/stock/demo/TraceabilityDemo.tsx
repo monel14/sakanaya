@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../shared/components/ui';
 import { TraceabilityReports } from '../components/ConsultationStock/TraceabilityReports';
 
 export const TraceabilityDemo: React.FC = () => {

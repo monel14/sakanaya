@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Filter, Search, Calendar, BarChart3, Building2, Package } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../../shared/components/ui';
 
 export interface StockFilterOptions {
   search: string;

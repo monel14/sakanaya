@@ -10,7 +10,7 @@ import {
   calculateLigneReceptionSousTotal,
   generateBonReceptionNumber
 } from '../utils/stockCalculations';
-import { stockService } from '@/shared/services/stockService';
+import { stockService } from '../../../shared/services/stockService';
 
 export interface BonReceptionForm {
   id?: string;

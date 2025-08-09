@@ -21,12 +21,12 @@ import {
   Target,
   Clock
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Badge } from '@/components/ui';
-import { StockMovement, MouvementStock } from '../../types';
-import { Product } from '@/features/sales/types';
-import { stockService } from '@/shared/services';
-import { productService } from '@/shared/services';
-import { traceabilityService, TraceabilityFilters, TraceabilityReport, LogisticsFlowReport } from '../../services/traceabilityService';
+import { Card, CardHeader, CardTitle, CardContent, Button, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Badge } from '../../../../shared/components/ui';
+import { StockMovement, MouvementStock } from '../../shared/types';
+import { Product } from '../../../sales/types';
+import { stockService } from '../../../../shared/services';
+import { productService } from '../../../../shared/services';
+import { traceabilityService, TraceabilityFilters, TraceabilityReport, LogisticsFlowReport } from '../../shared/services/traceabilityService';
 import { toast } from 'sonner';
 
 interface StockHistoryProps {

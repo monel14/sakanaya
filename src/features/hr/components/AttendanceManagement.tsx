@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserCheck } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../shared/components/ui';
 
 export const AttendanceManagement: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Supplier } from '../../types';
+import { Supplier } from '../../shared/types';
 
 interface SupplierListProps {
   suppliers: Supplier[];

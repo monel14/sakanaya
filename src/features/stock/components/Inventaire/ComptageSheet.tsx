@@ -11,8 +11,8 @@ import {
   Eye,
   EyeOff
 } from 'lucide-react';
-import { Inventaire, LigneInventaire } from '../../types';
-import { UpdateInventaireData } from '../../services/inventaireService';
+import { Inventaire, LigneInventaire } from '../../shared/types';
+import { UpdateInventaireData } from '../../shared/services/inventaireService';
 
 interface ComptageSheetProps {
   inventaire: Inventaire;

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { 
   bonReceptionService, 
   BonReceptionForm, 

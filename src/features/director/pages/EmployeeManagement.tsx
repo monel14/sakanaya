@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useEmployees, useSalaryManagement } from '../../../shared/hooks/useEmployees';
-import { useNotifications } from '../../../context/NotificationContext';
+import { useNotifications } from '../../../shared/context/NotificationContext';
 
 interface EmployeeManagementProps {
   user: any;

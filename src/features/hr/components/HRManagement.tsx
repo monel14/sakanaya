@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { UserPlus, Users, DollarSign, FileText, Calculator } from 'lucide-react';
-import { Button, Card, CardContent } from '@/components/ui';
+import { Button, Card, CardContent } from '../../../shared/components/ui';
 import { EmployeeForm } from './EmployeeForm';
 import { EmployeeList } from './EmployeeList';
 import { SalaryManagement } from './SalaryManagement';
 import { PayrollReport } from './PayrollSummary';
 import { MonthlyCostCalculator } from './MonthlyCostCalculator';
-import { useEmployees } from '@/shared/hooks/useEmployees';
+import { useEmployees } from '../../../shared/hooks/useEmployees';
 import { Employee } from '../types';
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { useAuth } from '../../auth/hooks/useAuth';
 
 // Mock stores data - in a real app, this would come from a store service
 const mockStores = [

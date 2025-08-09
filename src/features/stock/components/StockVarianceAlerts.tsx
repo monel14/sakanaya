@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { AlertTriangle, TrendingDown, Activity, CheckCircle, RefreshCw, Settings } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Badge, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui';
-import { StockVarianceAlert, stockAlertsService } from '@/shared/services/stockAlertsService';
-import { Product } from '@/features/sales/types';
-import { productService } from '@/shared/services';
+import { Card, CardHeader, CardTitle, CardContent, Button, Badge, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../../../shared/components/ui';
+import { StockVarianceAlert, stockAlertsService } from '../../../shared/services/stockAlertsService';
+import { Product } from '../../sales/types';
+import { productService } from '../../../shared/services';
 import { toast } from 'sonner';
 
 interface StockVarianceAlertsProps {

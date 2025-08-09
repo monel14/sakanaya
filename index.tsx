@@ -1,10 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './src/App';
-import { AuthProvider } from './src/context/AuthContext';
-import { NavigationProvider } from './src/context/NavigationContext';
-import { NotificationProvider } from './src/context/NotificationContext';
-import { UIProvider } from './src/context/UIContext';
+import { AuthProvider } from './src/shared/context/AuthContext';
+import { NavigationProvider } from './src/shared/context/NavigationContext';
+import { NotificationProvider } from './src/shared/context/NotificationContext';
+import { UIProvider } from './src/shared/context/UIContext';
 import './src/index.css';
 
 // Gestion d'erreur globale

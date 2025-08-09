@@ -9,7 +9,7 @@ import {
   Filter,
   Eye
 } from 'lucide-react';
-import { Inventaire } from '../../types';
+import { Inventaire } from '../../shared/types';
 
 interface InventaireReportsProps {
   inventaires: Inventaire[];

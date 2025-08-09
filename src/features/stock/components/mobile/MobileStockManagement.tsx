@@ -17,11 +17,11 @@ import {
   ArrowUpDown,
   Eye
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Badge, Input } from '@/components/ui';
-import { StockLevel, StockMovement } from '../../types';
-import { Product } from '@/features/sales/types';
-import { stockService } from '@/shared/services';
-import { productService } from '@/shared/services';
+import { Card, CardHeader, CardTitle, CardContent, Button, Badge, Input } from '../../../../shared/components/ui';
+import { StockLevel, StockMovement } from '../../shared/types';
+import { Product } from '../../../sales/types';
+import { stockService } from '../../../../shared/services';
+import { productService } from '../../../../shared/services';
 import { toast } from 'sonner';
 
 interface MobileStockManagementProps {

@@ -11,8 +11,8 @@ import {
   TrendingUp,
   TrendingDown
 } from 'lucide-react';
-import { Inventaire } from '../../types';
-import { useInventaire } from '../../hooks/useInventaire';
+import { Inventaire } from '../../shared/types';
+import { useInventaire } from '../../shared/hooks/useInventaire';
 
 interface InventaireListProps {
   userRole: 'director' | 'manager';

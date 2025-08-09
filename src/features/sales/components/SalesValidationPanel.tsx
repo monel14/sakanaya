@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { AlertCircle, CheckCircle, Clock, RefreshCw } from 'lucide-react';
-import { Card, CardContent, Button } from '@/components/ui';
-import { DailySales, User } from '@/types';
+import { Card, CardContent, Button } from '../../../shared/components/ui';
+import { DailySales, User } from '../../../shared/types';
 import { ValidationCard } from './ValidationCard';
-import { usePriceManagement } from '@/shared/hooks';
-import { salesValidationService } from '@/shared/services';
+import { usePriceManagement } from '../../../shared/hooks';
+import { salesValidationService } from '../../../shared/services';
 import { toast } from 'sonner';
 
 interface SalesValidationPanelProps {

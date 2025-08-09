@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '../../../context/NavigationContext';
+import { useNavigation } from '../../../shared/context/NavigationContext';
 
 interface NotFoundProps {
   user?: any;

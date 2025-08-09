@@ -14,7 +14,7 @@ import {
   Hash,
   MessageSquare
 } from 'lucide-react';
-import { BonReception, MouvementStock } from '../../types';
+import { BonReception, MouvementStock } from '../../shared/types';
 
 interface BonReceptionDetailProps {
   bon: BonReception;

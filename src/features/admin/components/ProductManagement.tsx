@@ -1,6 +1,6 @@
 import React from 'react';
 import { Plus, Edit, Trash2 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button } from '../../../shared/components/ui';
 
 export const ProductManagement: React.FC = () => {
   return (

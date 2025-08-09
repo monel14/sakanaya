@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
   Button
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useStoreManagement } from '../hooks/useStoreManagement';
 
 const StoreCreationSchema = z.object({

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { BonReceptionForm } from '../BonReceptionForm';
-import { simpleBonReceptionService } from '../../services/simpleBonReceptionService';
+import { simpleBonReceptionService } from '../../shared/services/simpleBonReceptionService';
 
 // Mock the service
 vi.mock('../../services/simpleBonReceptionService', () => ({

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, User, Eye, Search, TrendingUp, TrendingDown } from 'lucide-react';
-import { Card, CardContent, Button, Input } from '@/components/ui';
-import { DailySales, User as UserType } from '@/types';
+import { Card, CardContent, Button, Input } from '../../../shared/components/ui';
+import { DailySales, User as UserType } from '../../../shared/types';
 import { DailyClosingSummary } from './DailyClosingSummary';
-import { usePriceManagement } from '@/shared/hooks';
-import { closingHistoryService } from '@/shared/services';
-import { cn } from '@/shared/lib/utils';
+import { usePriceManagement } from '../../../shared/hooks';
+import { closingHistoryService } from '../../../shared/services';
+import { cn } from '../../../shared/lib/utils';
 import { toast } from 'sonner';
 
 interface ClosingHistoryProps {

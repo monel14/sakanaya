@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
   Button
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useUserManagement } from '../hooks/useUserManagement';
 import { UserWithEmployee } from '../types';
 

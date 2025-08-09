@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { RefreshCw, AlertCircle, CheckCircle, Clock } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Badge } from '@/components/ui';
-import { Product, User } from '@/types';
-import { usePriceManagement } from '@/shared/hooks';
+import { Card, CardHeader, CardTitle, CardContent, Button, Badge } from '../../../shared/components/ui';
+import { Product, User } from '../../../shared/types';
+import { usePriceManagement } from '../../../shared/hooks';
 import { PriceUpdateRow } from './PriceUpdateRow';
 import { PriceHistoryModal } from './PriceHistoryModal';
 import { toast } from 'sonner';

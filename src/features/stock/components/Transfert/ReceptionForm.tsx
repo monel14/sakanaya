@@ -11,8 +11,8 @@ import {
     Minus,
     Plus
 } from 'lucide-react';
-import { TransfertStock, LigneTransfert } from '../../types';
-import { useTransferts } from '../../hooks/useTransferts';
+import { TransfertStock, LigneTransfert } from '../../shared/types';
+import { useTransferts } from '../../shared/hooks/useTransferts';
 
 interface ReceptionFormProps {
     transfert: TransfertStock;

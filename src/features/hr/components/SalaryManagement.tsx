@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Employee, PayrollSummary, SalaryAdjustment } from '../types';
-import { useSalaryManagement } from '@/shared/hooks/useEmployees';
+import { useSalaryManagement } from '../../../shared/hooks/useEmployees';
 import { SalaryAdjustmentForm } from './SalaryAdjustmentForm';
 import { SalaryAdjustmentHistory } from './SalaryAdjustmentHistory';
 import {
@@ -22,7 +22,7 @@ import {
   TableHeader,
   TableRow,
   Badge
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { DollarSign, TrendingUp, Users, Calculator, Plus, History } from 'lucide-react';
 
 interface SalaryManagementProps {

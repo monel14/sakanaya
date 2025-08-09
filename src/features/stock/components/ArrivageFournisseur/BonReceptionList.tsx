@@ -12,7 +12,7 @@ import {
     TrendingUp,
     Download
 } from 'lucide-react';
-import { BonReception, Supplier } from '../../types';
+import { BonReception, Supplier } from '../../shared/types';
 
 interface BonReceptionListProps {
     bonsReception: BonReception[];

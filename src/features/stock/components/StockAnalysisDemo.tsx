@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BarChart3, History, AlertTriangle, TrendingDown } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button } from '../../../shared/components/ui';
 import { StockMovementHistory } from './StockMovementHistory';
 import { LossRateReport } from './LossRateReport';
 import { StockVarianceAlerts } from './StockVarianceAlerts';

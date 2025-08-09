@@ -20,7 +20,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 
 interface SalaryAdjustmentFormProps {
   employeeId: string;

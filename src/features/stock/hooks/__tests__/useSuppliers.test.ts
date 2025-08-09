@@ -3,7 +3,7 @@ import { renderHook, act, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 import { useSuppliers } from '../useSuppliers';
-import { supplierService } from '../../services/supplierService';
+import { supplierService } from '../../shared/services/supplierService';
 
 // Mock the supplier service
 vi.mock('../../services/supplierService', () => ({

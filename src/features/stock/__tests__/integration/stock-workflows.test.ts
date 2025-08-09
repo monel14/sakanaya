@@ -4,8 +4,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 
 // Import des hooks
-import { useBonsReception } from '../../hooks/useBonsReception';
-import { useTransferts } from '../../hooks/useTransferts';
+import { useBonsReception } from '../../shared/hooks/useBonsReception';
+import { useTransferts } from '../../shared/hooks/useTransferts';
 
 // Types
 import type {
@@ -15,7 +15,7 @@ import type {
     Supplier,
     StockLevel,
     MouvementStock
-} from '../../types';
+} from '../../shared/types';
 
 // Mock des services
 vi.mock('../../services/stockService');

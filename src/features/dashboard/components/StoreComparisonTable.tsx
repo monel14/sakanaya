@@ -1,6 +1,6 @@
 import React from 'react';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import { Badge } from '@/components/ui';
+import { Badge } from '../../../shared/components/ui';
 import { StoreComparison } from '../types/costAnalysis';
 
 interface StoreComparisonTableProps {

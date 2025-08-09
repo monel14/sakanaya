@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Supplier } from '../../types';
-import { supplierService } from '../../services/supplierService';
+import { Supplier } from '../../shared/types';
+import { supplierService } from '../../shared/services/supplierService';
 import { SupplierForm } from './SupplierForm';
 import { SupplierList } from './SupplierList';
 import { SupplierStats } from './SupplierStats';

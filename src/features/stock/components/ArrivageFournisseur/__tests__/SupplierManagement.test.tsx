@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { SupplierManagement } from '../SupplierManagement';
-import { supplierService } from '../../../services/supplierService';
+import { supplierService } from '../../../shared/services/supplierService';
 
 // Mock the supplier service
 vi.mock('../../../services/supplierService', () => ({

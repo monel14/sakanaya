@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useUserManagement } from '../hooks/useUserManagement';
 import { UserCreationForm } from './UserCreationForm';
 import { UserEditForm } from './UserEditForm';

@@ -1,4 +1,4 @@
-import { UserRole } from '@/features/auth/types';
+import { UserRole } from '../../features/auth/types';
 
 export interface Notification {
   id: string;

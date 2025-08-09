@@ -13,8 +13,8 @@ import {
   Download,
   Plus
 } from 'lucide-react';
-import { TransfertStock } from '../../types';
-import { useTransferts } from '../../hooks/useTransferts';
+import { TransfertStock } from '../../shared/types';
+import { useTransferts } from '../../shared/hooks/useTransferts';
 
 interface TransfertListProps {
   userRole: 'director' | 'manager';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ClipboardList, Plus, AlertTriangle } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../components/ui/Tabs';
-import { Modal, ModalBody } from '../../../components/ui/Modal';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../shared/components/ui/Tabs';
+import { Modal, ModalBody } from '../../../shared/components/ui/Modal';
 
 // Import des composants d'inventaire
 import { InventaireForm } from '../../stock/components/Inventaire/InventaireForm';

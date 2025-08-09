@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingDown, AlertTriangle, BarChart3, Calendar, Download, RefreshCw } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, Button, Badge } from '@/components/ui';
+import { Card, CardHeader, CardTitle, CardContent, Button, Badge } from '../../../shared/components/ui';
 import { LossRateReport as LossRateReportType } from '../types';
-import { stockService } from '@/shared/services';
+import { stockService } from '../../../shared/services';
 import { toast } from 'sonner';
 
 interface LossRateReportProps {

@@ -2,19 +2,19 @@
 export { StockManagementPage } from './pages/StockManagementPage';
 
 // Composants de gestion des fournisseurs
-export { SupplierManagement } from './components/ArrivageFournisseur/SupplierManagement';
-export { SupplierForm } from './components/ArrivageFournisseur/SupplierForm';
-export { SupplierList } from './components/ArrivageFournisseur/SupplierList';
+export { SupplierManagement } from './shared/components/ArrivageFournisseur/SupplierManagement';
+export { SupplierForm } from './shared/components/ArrivageFournisseur/SupplierForm';
+export { SupplierList } from './shared/components/ArrivageFournisseur/SupplierList';
 
 // Composants de bons de réception
-export { BonReceptionForm } from './components/ArrivageFournisseur/BonReceptionForm';
-export { BonReceptionList } from './components/ArrivageFournisseur/BonReceptionList';
-export { BonReceptionDetail } from './components/ArrivageFournisseur/BonReceptionDetail';
+export { BonReceptionForm } from './shared/components/ArrivageFournisseur/BonReceptionForm';
+export { BonReceptionList } from './shared/components/ArrivageFournisseur/BonReceptionList';
+export { BonReceptionDetail } from './shared/components/ArrivageFournisseur/BonReceptionDetail';
 
 // Composants existants
-export { StockLevelDisplay } from './components/StockLevelDisplay';
-export { LossEntry } from './components/LossEntry';
-export { ArrivalEntry } from './components/ArrivalEntry';
+export { StockLevelDisplay } from './shared/components/StockLevelDisplay';
+export { LossEntry } from './shared/components/LossEntry';
+export { ArrivalEntry } from './shared/components/ArrivalEntry';
 
 // Démonstrations
 export { IntegratedStockDemo } from './demo/IntegratedStockDemo';
@@ -23,12 +23,12 @@ export { SupplierDemo } from './demo/SupplierDemo';
 export { TransfertDemo } from './demo/TransfertDemo';
 
 // Types
-export * from './types';
+export * from './shared/types';
 
 // Services
-export { supplierService } from './services/supplierService';
-export { transfertService } from './services/transfertService';
+export { supplierService } from './shared/services/supplierService';
+export { transfertService } from './shared/services/transfertService';
 
 // Hooks
-export { useBonsReception } from './hooks/useBonsReception';
-export { useTransferts } from './hooks/useTransferts';
+export { useBonsReception } from './shared/hooks/useBonsReception';
+export { useTransferts } from './shared/hooks/useTransferts';

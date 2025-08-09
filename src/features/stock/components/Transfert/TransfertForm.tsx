@@ -9,9 +9,9 @@ import {
   Save,
   X
 } from 'lucide-react';
-import { TransfertStock, LigneTransfert, ProductStock } from '../../types';
-import { useTransferts } from '../../hooks/useTransferts';
-import { validateTransfertCreation } from '../../utils/stockValidations';
+import { TransfertStock, LigneTransfert, ProductStock } from '../../shared/types';
+import { useTransferts } from '../../shared/hooks/useTransferts';
+import { validateTransfertCreation } from '../../shared/utils/stockValidations';
 
 interface TransfertFormProps {
   onSuccess?: (transfert: TransfertStock) => void;

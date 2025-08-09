@@ -7,7 +7,7 @@ import { SupplierManagementPage } from '../pages';
  * Pour utiliser cette interface dans votre application :
  * 
  * 1. Importez la page :
- *    import { SupplierManagementPage } from '@/features/stock';
+ *    import { SupplierManagementPage } from '..';
  * 
  * 2. Ajoutez-la à vos routes (exemple avec React Router) :
  *    <Route path="/stock/suppliers" element={<SupplierManagementPage />} />

@@ -53,3 +53,5 @@ export {
   AlertDialogHeader, 
   AlertDialogTitle 
 } from './AlertDialog';
+export { Modal, ModalBody, ModalFooter } from './Modal';
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';

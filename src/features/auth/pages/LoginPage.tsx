@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Fish, Bell } from 'lucide-react';
-import { useAuth } from '../../../context/AuthContext';
-import { useNotifications } from '../../../context/NotificationContext';
+import { useAuth } from '../../../shared/context/AuthContext';
+import { useNotifications } from '../../../shared/context/NotificationContext';
 
 export const LoginPage: React.FC = () => {
   const { login } = useAuth();

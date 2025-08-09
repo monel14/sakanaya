@@ -7,7 +7,7 @@ import type {
     Inventaire,
     Supplier,
     StockLevel
-} from '../../types';
+} from '../../shared/types';
 
 describe('Stock Integration Tests', () => {
     describe('Type Definitions', () => {

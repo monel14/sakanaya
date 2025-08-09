@@ -1,8 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
-import { AuthProvider } from './context/AuthContext';
-import { NavigationProvider } from './context/NavigationContext';
+import { AuthProvider } from './shared/context/AuthContext';
+import { NavigationProvider } from './shared/context/NavigationContext';
 
 // Ajoutez d'autres providers ici si besoin
 

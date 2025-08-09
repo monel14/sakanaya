@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fish, Menu, RotateCcw, LogOut, Calendar } from 'lucide-react';
 import { Button } from '../ui';
-import { User } from '@/types';
+import { User } from '../../types';
 
 interface HeaderProps {
   currentUser: User | null;

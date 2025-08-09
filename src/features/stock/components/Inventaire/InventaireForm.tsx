@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Package, Store, MessageSquare, Plus } from 'lucide-react';
-import { CreateInventaireData } from '../../services/inventaireService';
+import { CreateInventaireData } from '../../shared/services/inventaireService';
 
 interface Store {
   id: string;

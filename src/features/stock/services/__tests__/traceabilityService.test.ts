@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { traceabilityService, TraceabilityFilters } from '../traceabilityService';
-import { MouvementStock, MouvementType } from '../../types';
+import { MouvementStock, MouvementType } from '../../shared/types';
 
 // Mock the MCP Supabase calls
 vi.mock('@/lib/mcp', () => ({

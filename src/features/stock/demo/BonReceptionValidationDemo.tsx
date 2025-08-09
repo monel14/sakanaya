@@ -6,7 +6,7 @@ import {
   CardContent, 
   Button,
   Badge
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { 
   CheckCircle, 
   XCircle, 

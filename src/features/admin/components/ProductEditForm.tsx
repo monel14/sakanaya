@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
   Button
-} from '@/components/ui';
+} from '../../../shared/components/ui';
 import { useProductCatalog } from '../hooks/useProductCatalog';
 import { Product } from '../../sales/types';
 

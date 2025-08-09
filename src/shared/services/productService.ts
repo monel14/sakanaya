@@ -1,4 +1,4 @@
-import { Product, PriceHistory } from '@/features/sales/types';
+import { Product, PriceHistory } from '../../features/sales/types';
 import { NotificationService } from './notificationService';
 
 /**

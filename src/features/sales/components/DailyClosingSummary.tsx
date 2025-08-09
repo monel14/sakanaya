@@ -1,8 +1,8 @@
 import React from 'react';
 import { Calendar, Clock, User, FileText, CheckCircle, DollarSign } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui';
-import { DailySales, Product, User as UserType } from '@/types';
-import { cn } from '@/shared/lib/utils';
+import { Card, CardContent } from '../../../shared/components/ui';
+import { DailySales, Product, User as UserType } from '../../../shared/types';
+import { cn } from '../../../shared/lib/utils';
 
 interface DailyClosingSummaryProps {
   sale: DailySales;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Plus, DollarSign, Package, Edit, History, Trash2 } from 'lucide-react';
 import { usePriceManagement } from '../../../shared/hooks/usePriceManagement';
-import { useAuth } from '../../../context/AuthContext';
-import { useNotifications } from '../../../context/NotificationContext';
-import { Modal, ModalBody, ModalFooter } from '../../../components/ui/Modal';
+import { useAuth } from '../../../shared/context/AuthContext';
+import { useNotifications } from '../../../shared/context/NotificationContext';
+import { Modal, ModalBody, ModalFooter } from '../../../shared/components/ui/Modal';
 
 interface ProductCatalogProps {
   user: any;

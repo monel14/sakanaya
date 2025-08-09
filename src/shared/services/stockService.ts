@@ -8,8 +8,8 @@ import {
   ProductStock,
   BonReception,
   TransfertStock
-} from '@/features/stock/types';
-import { calculateCUMP, calculateStockValue } from '@/features/stock/utils/stockCalculations';
+} from '../../features/stock/types';
+import { calculateCUMP, calculateStockValue } from '../../features/stock/utils/stockCalculations';
 
 class StockService {
   private stockMovements: StockMovement[] = [];
