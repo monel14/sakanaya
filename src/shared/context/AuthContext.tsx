@@ -1,18 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-export interface User {
-  id: string;
-  role: 'director' | 'manager';  // Seulement les rôles selon requirements
-  name?: string;
-  email?: string;
-  phone?: string;
-  store?: string;
-  employeeId?: string;  // Association avec un employé
-  isActive: boolean;
-  createdAt: Date;
-  lastLogin?: Date;
-  [key: string]: any;
-}
+// Import du type User unifié
+import { User } from '../../features/auth/types';
 
 interface LoginCredentials {
   username: string;
