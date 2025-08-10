@@ -3,8 +3,7 @@
 // Shared exports
 export * from './shared';
 
-// Feature exports
-export * from './features/auth';
+// Feature exports - résolution des conflits d'exports
 export * from './features/admin';
 export * from './features/stock';
 export * from './features/dashboard';
@@ -12,5 +11,13 @@ export * from './features/hr';
 export * from './features/sales';
 export * from './features/reports';
 
-// Config exports
-export * from './config/navigation';
+// Auth exports avec résolution de conflit useAuth
+// Note: useAuth est déjà exporté par ./shared/context/AuthContext
+// Les composants auth sont exportés individuellement si nécessaire
+
+// Config exports avec résolution de conflit NavigationItem
+export { 
+  navigationConfig, 
+  getNavigationForRole
+} from './config/navigation';
+export type { NavigationItem as ConfigNavigationItem } from './config/navigation';
