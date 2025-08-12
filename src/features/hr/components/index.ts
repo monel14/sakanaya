@@ -1,9 +1,0 @@
-export { HRManagement } from './HRManagement';
-export { AttendanceManagement } from './AttendanceManagement';
-export { EmployeeForm } from './EmployeeForm';
-export { EmployeeList } from './EmployeeList';
-export { SalaryManagement } from './SalaryManagement';
-export { MonthlyCostCalculator } from './MonthlyCostCalculator';
-export { SalaryAdjustmentForm } from './SalaryAdjustmentForm';
-export { SalaryAdjustmentHistory } from './SalaryAdjustmentHistory';
-export { PayrollReport } from './PayrollSummary';

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sakanaya — V4 Refonte</title>
+  <meta name="description" content="Refonte UI/UX Sakanaya — tableau de bord, gestion stocks, ventes" />
+  <!-- Tailwind CDN (play) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary-500: #2563eb;
+      --primary-600: #1e40af;
+      --accent-500: #10b981;
+      --warn-500: #f59e0b;
+      --danger-500: #ef4444;
+      --bg-100: #f8fafc;
+      --muted: #6b7280;
+      --card-radius: 16px;
+    }
+    html,body{height:100%}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, rgba(248,250,252,1) 0%, rgba(255,255,255,1) 100%);
+      color: #0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .app-shell{min-height:100vh; display:flex; flex-direction:column;}
+    /* Header */
+    header.site-header{
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.7);
+      border-bottom: 1px solid rgba(15,23,42,0.04);
+    }
+    /* Sidebar */
+    .sidebar{
+      width: 260px;       
+      min-width:260px;
+      background: linear-gradient(180deg, rgba(37,99,235,0.06), rgba(255,255,255,0.03));
+      border-right: 1px solid rgba(15,23,42,0.04);
+      padding: 18px;
+      border-radius: 0 12px 12px 0;
+    }
+    .nav-link{
+      display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;color:var(--muted);
+    }
+    .nav-link.active{
+      background: linear-gradient(90deg, rgba(37,99,235,0.12), rgba(16,185,129,0.04));
+      color: var(--primary-600);
+      font-weight:600;
+      box-shadow: 0 6px 18px rgba(37,99,235,0.06);
+    }
+    /* Cards */
+    .card{
+      background: white;
+      border-radius: var(--card-radius);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+      padding:18px;
+    }
+    .card-header{
+      display:flex;align-items:center;gap:10px;margin-bottom:14px;
+      font-weight:600;color:#0f172a;
+    }
+    .muted { color: var(--muted); }
+    /* Buttons */
+    .btn {
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-weight:600;
+      border:none;cursor:pointer;
+    }
+    .btn-primary{ background: linear-gradient(180deg,var(--primary-500),var(--primary-600)); color:white; box-shadow: 0 8px 24px rgba(37,99,235,0.12);}
+    .btn-ghost{ background:transparent;border:1px solid rgba(15,23,42,0.06); color:var(--muted); }
+    .btn-danger{ background:linear-gradient(180deg,var(--danger-500),#c0261c); color:white; }
+    .btn-sm{ padding:6px 10px; font-size:0.9rem; border-radius:8px; }
+    /* Table */
+    table thead th { background: #f1f5f9; font-weight:600; padding:10px; border-bottom: none; color:#0f172a; }
+    table tbody tr:nth-child(even){ background:#fbfdff; }
+    table td, table th { padding:10px; border-bottom:1px solid rgba(15,23,42,0.04); font-size:0.95rem; }
+    /* Modal backdrop blur */
+    .modal-backdrop{ position:fixed; inset:0; background:rgba(2,6,23,0.45); display:flex; align-items:center; justify-content:center; z-index:60; }
+    .modal-panel{ width:92%; max-width:900px; border-radius:14px; padding:20px; background:linear-gradient(180deg,#fff,#fbfdff); box-shadow:0 20px 40px rgba(2,6,23,0.4);}
+    /* Toasts */
+    .toast-container{ position:fixed; right:20px; bottom:20px; z-index:80; display:flex; flex-direction:column; gap:10px; }
+    .toast{ min-width:220px; background:white; padding:12px 14px; border-radius:10px; box-shadow:0 10px 30px rgba(2,6,23,0.12); display:flex; gap:10px; align-items:center; }
+    /* Responsive tweaks */
+    @media (max-width:1024px){
+      .sidebar{ position:fixed; left:0; top:0; height:100vh; z-index:50; transform:translateX(-110%); transition:transform 260ms ease-in-out; }
+      .sidebar.open{ transform:translateX(0); }
+      main.main-content{ padding:18px; margin-left:0; }
+    }
+    /* small utilities */
+    .kpi-number{ font-weight:700; font-size:1.25rem; color:#0f172a; }
+    .kpi-label{ font-size:0.85rem; color:var(--muted); }
+    .icon-circle{ width:40px;height:40px;border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(59,130,246,0.12); color:var(--primary-600); }
+    /* skeleton */
+    .skeleton{ background: linear-gradient(90deg,#eef2ff 0%, #f8fafc 50%, #eef2ff 100%); background-size:200% 100%; animation: shimmer 1.6s linear infinite; border-radius:8px; }
+    @keyframes shimmer{ from{ background-position:200% 0 } to{ background-position:-200% 0 } }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- HEADER -->
+    <header class="site-header shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <button id="menuToggle" class="p-2 rounded-lg lg:hidden btn-ghost" aria-label="Ouvrir le menu">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="flex items-center gap-3">
+            <div class="rounded-lg p-2 bg-white shadow-sm"><i class="fa-solid fa-fish text-primary"></i></div>
+            <div>
+              <div class="text-lg font-semibold">Sakanaya</div>
+              <div class="text-xs muted">Gestion & supervision — V4</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="hidden sm:flex items-center bg-white rounded-xl p-2 shadow-sm gap-2">
+            <input id="globalSearch" aria-label="Recherche" class="px-3 py-2 outline-none text-sm" placeholder="Rechercher magasin, produit..." />
+            <button class="btn btn-ghost btn-sm" onclick="toast('Recherche non implémentée')"><i class="fa fa-magnifying-glass"></i></button>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button id="roleSwitch" class="btn btn-ghost btn-sm" title="Basculer la vue">Basculer la vue</button>
+            <div id="currentUserLabel" class="text-sm muted">Vue: Directeur</div>
+            <button id="logoutBtn" class="btn btn-ghost btn-sm" title="Déconnexion"><i class="fa fa-sign-out-alt"></i></button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex flex-1">
+      <!-- SIDEBAR -->
+      <aside id="sidebar" class="sidebar hidden lg:block">
+        <nav aria-label="Navigation principal" class="space-y-4">
+          <div class="px-2 text-xs uppercase muted font-semibold">Pilotage</div>
+          <a href="#" class="nav-link active" data-view="director-dashboard"><span class="icon-circle"><i class="fa fa-tachometer-alt"></i></span>Tableau de bord</a>
+          <a href="#" class="nav-link" data-view="reports-view"><span class="icon-circle"><i class="fa fa-chart-bar"></i></span>Rapports & analyses</a>
+
+          <div class="px-2 text-xs uppercase muted font-semibold mt-6">Gestion</div>
+          <a href="#" class="nav-link" data-view="stock-management"><span class="icon-circle"><i class="fa fa-boxes"></i></span>Stocks</a>
+          <a href="#" class="nav-link" data-view="product-management"><span class="icon-circle"><i class="fa fa-dollar-sign"></i></span>Produits & Prix</a>
+          <a href="#" class="nav-link" data-view="hr-management"><span class="icon-circle"><i class="fa fa-users"></i></span>RH & Présences</a>
+
+          <div class="px-2 text-xs uppercase muted font-semibold mt-6">Administration</div>
+          <a href="#" class="nav-link" data-view="admin-view"><span class="icon-circle"><i class="fa fa-cogs"></i></span>Paramètres</a>
+        </nav>
+      </aside>
+
+      <!-- SIDEBAR MOBILE OVERLAY -->
+      <aside id="sidebarMobile" class="sidebar lg:hidden" aria-hidden="true"></aside>
+
+      <!-- MAIN -->
+      <main id="main" class="flex-1 main-content p-6" style="min-height:calc(100vh - 76px);">
+        <!-- VIEWS -->
+        <!-- Director Dashboard -->
+        <section id="director-dashboard" class="view active">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div class="card flex items-center gap-4">
+              <div class="icon-circle bg-gradient-to-br from-blue-50 to-white text-blue-600"><i class="fa fa-wallet"></i></div>
+              <div>
+                <div class="kpi-label">Chiffre d'affaires (jour)</div>
+                <div class="kpi-number">1 250 000 CFA</div>
+              </div>
+            </div>
+            <div class="card flex items-center gap-4">
+              <div class="icon-circle bg-gradient-to-br from-green-50 to-white text-green-600"><i class="fa fa-chart-line"></i></div>
+              <div>
+                <div class="kpi-label">Marge brute (jour)</div>
+                <div class="kpi-number">480 000 CFA</div>
+              </div>
+            </div>
+            <div class="card flex items-center gap-4">
+              <div class="icon-circle bg-gradient-to-br from-yellow-50 to-white text-yellow-600"><i class="fa fa-exclamation-triangle"></i></div>
+              <div>
+                <div class="kpi-label">Taux de perte (jour)</div>
+                <div class="kpi-number">2.8%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="card lg:col-span-2" style="min-height:260px;">
+              <div class="card-header"><i class="fa fa-store mr-2 text-sm"></i> CA par magasin (7 derniers jours)</div>
+              <div style="height:240px;"><canvas id="caChart"></canvas></div>
+            </div>
+
+            <div class="card" style="min-height:260px;">
+              <div class="card-header"><i class="fa fa-bell mr-2"></i> Alertes & tâches</div>
+              <ul class="space-y-3">
+                <li class="p-3 rounded-lg bg-red-50 text-sm">Clôture manquante J-1 : Magasin Sandaga</li>
+                <li class="p-3 rounded-lg bg-blue-50 text-sm">Valider transfert #BT-0128 vers Almadies</li>
+                <li class="p-3 rounded-lg bg-yellow-50 text-sm">Sur-stock de Soles au Hub (+25kg)</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Store Dashboard -->
+        <section id="store-dashboard" class="view hidden">
+          <div class="card mb-6">
+            <div class="card-header"><i class="fa fa-store mr-2"></i>Mon magasin: <span id="storeName">Pointe des Almadies</span></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <button class="card text-center" onclick="navigateTo('sales-entry')"><i class="fa fa-cash-register text-2xl mb-2"></i><div class="font-semibold">Saisir les ventes</div></button>
+              <button class="card text-center" onclick="navigateTo('stock-management')"><i class="fa fa-boxes text-2xl mb-2"></i><div class="font-semibold">Gérer le stock</div></button>
+              <button class="card text-center" onclick="navigateTo('hr-management')"><i class="fa fa-user-check text-2xl mb-2"></i><div class="font-semibold">Pointage</div></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sales Entry -->
+        <section id="sales-entry" class="view hidden">
+          <div class="card mb-4">
+            <div class="card-header"><i class="fa fa-cash-register"></i> Saisie journalière des ventes <div class="ml-auto muted text-sm" id="saisieInfo"></div></div>
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th>Produit (Unité)</th>
+                    <th class="text-right">Prix unitaire</th>
+                    <th class="text-center w-1/4">Quantité</th>
+                    <th class="text-right">Sous-total</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="saisieTableBody"></tbody>
+              </table>
+            </div>
+            <div class="flex items-center justify-between mt-4">
+              <div>
+                <button class="btn btn-primary" onclick="ajouterLigneSaisie()"><i class="fa fa-plus"></i> Ajouter une ligne</button>
+              </div>
+              <div class="text-right">
+                <div class="muted text-sm">Total journalier</div>
+                <div class="text-xl font-bold text-primary" id="totalJournalier">0 CFA</div>
+              </div>
+            </div>
+            <div class="flex justify-end mt-4">
+              <button class="btn btn-primary" onclick="toast('Clôture journalière simulée')"><i class="fa fa-save"></i> Clôturer la journée</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reports -->
+        <section id="reports-view" class="view hidden">
+          <div class="card mb-6">
+            <div class="card-header"><i class="fa fa-chart-bar"></i> Rapports & analyses</div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+              <div>
+                <label class="text-sm muted">Type de rapport</label>
+                <select id="reportType" class="mt-1 w-full p-2 border rounded-md">
+                  <option>Performance des ventes</option>
+                  <option>Analyse des stocks</option>
+                  <option>Rapport RH</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-sm muted">Période</label>
+                <select id="reportPeriod" class="mt-1 w-full p-2 border rounded-md">
+                  <option>7 derniers jours</option>
+                  <option>Ce mois</option>
+                  <option>Mois dernier</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-sm muted">Magasin</label>
+                <select id="reportStore" class="mt-1 w-full p-2 border rounded-md">
+                  <option>Tous les magasins</option>
+                  <option>Hub</option>
+                  <option>Pointe des Almadies</option>
+                </select>
+              </div>
+              <div class="self-end">
+                <button class="btn btn-primary w-full" onclick="toast('Génération de rapport...')">Générer</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div class="card">
+                <div class="card-header">Analyse du CA par produit</div>
+                <div style="height:240px;"><canvas id="productPerfChart"></canvas></div>
+              </div>
+              <div class="card">
+                <div class="card-header">Données brutes</div>
+                <div class="flex justify-end mb-2"><button class="btn btn-primary btn-sm" onclick="toast('Export CSV')"><i class="fa fa-file-csv"></i> Exporter (CSV)</button></div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead><tr><th>Produit</th><th class="text-right">Volume (Kg)</th><th class="text-right">CA (CFA)</th></tr></thead>
+                    <tbody>
+                      <tr><td>Thon Rouge</td><td class="text-right">150.5</td><td class="text-right">978 250</td></tr>
+                      <tr><td>Crevettes</td><td class="text-right">88.2</td><td class="text-right">705 600</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Stock Management -->
+        <section id="stock-management" class="view hidden">
+          <div class="card mb-6">
+            <div class="card-header"><i class="fa fa-warehouse"></i> Pilotage global des stocks</div>
+            <div class="flex gap-3 mb-4 border-b pb-4">
+              <button class="btn btn-ghost btn-sm active-tab" data-tab="stock-overview">Vue d'ensemble</button>
+              <button class="btn btn-ghost btn-sm" data-tab="stock-transfers">Transferts</button>
+              <button class="btn btn-ghost btn-sm" data-tab="stock-arrivals">Arrivages</button>
+            </div>
+
+            <div id="stock-overview" class="tab-content">
+              <div style="height:240px;"><canvas id="stockDistributionChart"></canvas></div>
+            </div>
+            <div id="stock-transfers" class="tab-content hidden">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-semibold">Suivi des transferts</h3>
+                <button class="btn btn-primary btn-sm" onclick="toast('Nouveau transfert')"><i class="fa fa-plus"></i> Nouveau transfert</button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead><tr><th>#Bon</th><th>De</th><th>Vers</th><th>Statut</th><th>Date</th><th class="text-center">Action</th></tr></thead>
+                  <tbody><tr><td>BT-0128</td><td>Hub</td><td>Almadies</td><td><span class="px-2 py-1 rounded-full text-xs" style="background:#e0f2ff;color:#0369a1">En transit</span></td><td>04/08/2025</td><td class="text-center"><button class="text-blue-500 text-xs" onclick="toast('Voir BT-0128')">Voir</button></td></tr></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div id="stock-arrivals" class="tab-content hidden">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-semibold">Arrivages fournisseurs</h3>
+                <button class="btn btn-primary btn-sm" onclick="openModal('modalNouvelArrivage')"><i class="fa fa-plus"></i> Nouvel arrivage</button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead><tr><th>Date</th><th>Fournisseur</th><th>Produits</th><th class="text-right">Quantité</th><th class="text-center">Statut</th><th class="text-center">Action</th></tr></thead>
+                  <tbody>
+                    <tr><td>04/08/2025</td><td>Pêcheurs de Kayar</td><td>Thon, Crevettes</td><td class="text-right">125.5 kg</td><td class="text-center"><span class="px-2 py-1 rounded-full text-xs" style="background:#ecfdf5;color:#065f46">Validé</span></td><td class="text-center"><button class="text-blue-500 text-xs" onclick="toast('Détails')">Détails</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Store stock view -->
+          <div class="card">
+            <div class="card-header"><i class="fa fa-boxes"></i> Gestion de mon stock (Almadies)</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 bg-blue-50 rounded-lg">
+                <div class="font-semibold">Réception en attente</div>
+                <div class="muted text-sm">Bon de transfert #BT-0128 (depuis Hub)</div>
+                <div class="mt-3"><button class="btn btn-primary btn-sm" onclick="toast('Valider réception')"><i class="fa fa-check"></i> Contrôler & valider</button></div>
+              </div>
+
+              <div class="p-4 bg-red-50 rounded-lg">
+                <div class="font-semibold">Déclaration pertes & invendus</div>
+                <div class="mt-3"><label class="text-sm muted">Produit</label><select class="w-full p-2 border rounded-md"><option>Thon Rouge</option></select></div>
+                <div class="mt-2"><label class="text-sm muted">Quantité</label><input class="w-full p-2 border rounded-md" type="number" placeholder="Ex: 2.3"></div>
+                <div class="mt-3"><button class="btn btn-danger w-full" onclick="toast('Invendu déclaré')"><i class="fa fa-exclamation-triangle"></i> Déclarer invendu</button></div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Product Management -->
+        <section id="product-management" class="view hidden">
+          <div class="card mb-6">
+            <div class="card-header"><i class="fa fa-dollar-sign"></i> Mise à jour des prix du jour</div>
+            <p class="muted text-sm mb-4">Modifiez les prix des produits variables. Les changements sont appliqués immédiatement.</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead><tr><th>Produit</th><th class="text-right">Prix actuel</th><th class="text-right w-1/4">Nouveau prix</th></tr></thead>
+                <tbody id="productsTableBody"></tbody>
+              </table>
+            </div>
+            <div class="flex justify-between items-center mt-4">
+              <div class="text-sm muted"><i class="fa fa-calendar"></i> Dernière mise à jour: <span id="lastUpdate">05/08/2025</span></div>
+              <div><button class="btn btn-primary" onclick="validerNouveauxPrix()">Valider les nouveaux prix</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><i class="fa fa-package"></i> Catalogue produits <button class="btn btn-primary btn-sm ml-auto" onclick="openModal('modalAjoutProduit')"><i class="fa fa-plus"></i> Ajouter produit</button></div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead><tr><th>Nom produit</th><th>Unité</th><th>Type de prix</th><th class="text-center">Actions</th></tr></thead>
+                <tbody id="catalogueProduitsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- HR -->
+        <section id="hr-management" class="view hidden">
+          <div class="card mb-6">
+            <div class="card-header"><i class="fa fa-users"></i> Gestion des employés <button class="btn btn-primary btn-sm ml-auto" onclick="openModal('modalAjoutEmploye')"><i class="fa fa-user-plus"></i> Nouvel employé</button></div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead><tr><th>Nom</th><th>Magasin</th><th>Rôle</th><th class="text-right">Salaire</th><th class="text-center">Statut</th><th class="text-center">Action</th></tr></thead>
+                <tbody id="employeeTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><i class="fa fa-user-check"></i> Pointage des présences - Almadies</div>
+            <div class="mb-4"><label class="text-sm muted">Date</label><input id="datePointage" type="date" class="p-2 border rounded-md" /></div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead><tr><th>Employé</th><th>Rôle</th><th class="text-center">Présent</th><th class="text-center">Arrivée</th><th class="text-center">Départ</th><th>Commentaires</th></tr></thead>
+                <tbody>
+                  <tr><td>Amadou Diallo</td><td>Responsable</td><td class="text-center"><input type="checkbox" checked></td><td class="text-center"><input type="time" value="08:00" class="p-1 border rounded-md"></td><td class="text-center"><input type="time" value="18:00" class="p-1 border rounded-md"></td><td><input class="p-1 border rounded-md" placeholder="Commentaires..."></td></tr>
+                  <tr><td>Aïcha Ndiaye</td><td>Vendeur</td><td class="text-center"><input type="checkbox" checked></td><td class="text-center"><input type="time" value="08:30" class="p-1 border rounded-md"></td><td class="text-center"><input type="time" value="17:30" class="p-1 border rounded-md"></td><td><input class="p-1 border rounded-md"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex justify-end mt-4"><button class="btn btn-primary" onclick="toast('Présences enregistrées')"><i class="fa fa-save"></i> Enregistrer</button></div>
+          </div>
+        </section>
+
+        <!-- Admin -->
+        <section id="admin-view" class="view hidden">
+          <div class="card mb-6">
+            <div class="card-header"><i class="fa fa-cogs"></i> Administration</div>
+            <div class="flex gap-3 mb-4">
+              <button class="btn btn-ghost btn-sm" data-tab-admin="admin-users">Utilisateurs</button>
+              <button class="btn btn-ghost btn-sm" data-tab-admin="admin-stores">Magasins</button>
+              <button class="btn btn-ghost btn-sm" data-tab-admin="admin-logs">Logs</button>
+            </div>
+
+            <div id="admin-users" class="admin-tab">
+              <div class="flex justify-between items-center mb-4"><h3 class="font-semibold">Gestion des comptes</h3><button class="btn btn-primary btn-sm" onclick="openModal('modalAjoutUtilisateur')"><i class="fa fa-user-plus"></i> Ajouter</button></div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead><tr><th>Nom</th><th>Identifiant</th><th>Rôle</th><th>Magasin</th><th class="text-center">Statut</th><th class="text-center">Action</th></tr></thead>
+                  <tbody id="usersTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div id="admin-stores" class="admin-tab hidden">
+              <div class="flex justify-between items-center mb-4"><h3 class="font-semibold">Points de vente</h3><button class="btn btn-primary btn-sm" onclick="openModal('modalAjoutMagasin')"><i class="fa fa-store"></i> Nouveau magasin</button></div>
+              <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr><th>Nom</th><th>Type</th><th>Adresse</th><th class="text-center">Statut</th><th class="text-center">Action</th></tr></thead><tbody id="storesTableBody"></tbody></table></div>
+            </div>
+
+            <div id="admin-logs" class="admin-tab hidden">
+              <h3 class="font-semibold mb-4">Journal des actions</h3>
+              <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr><th>Date</th><th>Utilisateur</th><th>Action</th><th>Détails</th></tr></thead><tbody><tr><td>04/08/2025 17:10</td><td>directeur</td><td>MODIF_PRIX</td><td>Thon Rouge: 6500 -> 6800</td></tr></tbody></table></div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- MODALS (hidden by default) -->
+    <div id="modalContainer" aria-hidden="true"></div>
+
+    <!-- TOASTS -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  </div>
+
+<script>
+/* ------------------------------
+  Données & état (simples)
+   - kept data-driven arrays to populate tables
+-------------------------------*/
+const productsData = [
+  { id:1, name:'Thon Rouge', stockUnit:'kg', priceType:'Variable', basePrice:6500 },
+  { id:2, name:'Crevettes Roses', stockUnit:'kg', priceType:'Variable', basePrice:8000 },
+  { id:3, name:'Soles', stockUnit:'kg', priceType:'Variable', basePrice:4500 },
+  { id:4, name:'Bars', stockUnit:'kg', priceType:'Fixe', basePrice:3500 },
+  { id:5, name:'Sardines', stockUnit:'kg', priceType:'Fixe', basePrice:1500 },
+];
+
+const salesUnitsData = [
+  { id:1, name:'Thon au Kg', baseProduct:'Thon Rouge', price:6500, factor:1 },
+  { id:2, name:'Pack de Thon 500g', baseProduct:'Thon Rouge', price:3500, factor:0.5 },
+  { id:3, name:'Crevettes au Kg', baseProduct:'Crevettes Roses', price:8000, factor:1 },
+  { id:4, name:'Barquette Crevettes 250g', baseProduct:'Crevettes Roses', price:2200, factor:0.25 },
+];
+
+const usersData = [
+  { id:1, name:'Directeur Général', login:'directeur', role:'Directeur', store:'Tous', status:'Actif' },
+  { id:2, name:'Amadou Diallo', login:'almadies', role:'Magasin', store:'Almadies', status:'Actif' }
+];
+
+const employeesData = [
+  { id:1, name:'Amadou Diallo', store:'Almadies', role:'Responsable', salary:180000, status:'Actif' },
+  { id:2, name:'Aïcha Ndiaye', store:'Almadies', role:'Vendeur', salary:125000, status:'Actif' }
+];
+
+const storesData = [
+  { id:1, name:'Hub de Distribution', type:'Hub', address:'Zone Industrielle, Dakar', status:'Actif' },
+  { id:2, name:'Pointe des Almadies', type:'Magasin', address:'Almadies, Dakar', status:'Actif' }
+];
+
+/* ------------------------------
+  UI Utilities: Toasts, Modals
+-------------------------------*/
+function toast(message, opts={type:'info', duration:3500}){
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="text-sm">${message}</div>`;
+  container.appendChild(el);
+  setTimeout(()=> { el.style.opacity = '0'; el.style.transform = 'translateY(8px)'; }, opts.duration - 300);
+  setTimeout(()=> el.remove(), opts.duration);
+}
+
+/* Modal skeleton builder (re-usable) */
+function openModal(key){
+  const container = document.getElementById('modalContainer');
+  container.innerHTML = '';
+  let html = '';
+  if(key === 'modalAjoutProduit'){
+    html = `
+      <div class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal-panel">
+          <div class="flex items-center justify-between mb-2"><h3 class="text-lg font-semibold">Ajouter un produit</h3><button onclick="closeModal()" class="btn btn-ghost btn-sm">✕</button></div>
+          <div><label class="text-sm muted">Nom produit</label><input id="newProductName" class="w-full p-2 border rounded-md mt-1" /></div>
+          <div class="flex gap-2 justify-end mt-4"><button class="btn btn-ghost" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="createProduct()">Enregistrer</button></div>
+        </div>
+      </div>`;
+  } else if(key === 'modalAjoutUtilisateur'){
+    html = `
+      <div class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal-panel">
+          <div class="flex items-center justify-between mb-2"><h3 class="text-lg font-semibold">Ajouter un utilisateur</h3><button onclick="closeModal()" class="btn btn-ghost btn-sm">✕</button></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div><label class="text-sm muted">Nom complet</label><input id="u_name" class="w-full p-2 border rounded-md mt-1" /></div>
+            <div><label class="text-sm muted">Identifiant</label><input id="u_login" class="w-full p-2 border rounded-md mt-1" /></div>
+            <div><label class="text-sm muted">Rôle</label><select id="u_role" class="w-full p-2 border rounded-md mt-1"><option>Directeur</option><option>Magasin</option></select></div>
+            <div><label class="text-sm muted">Magasin associé</label><select id="u_store" class="w-full p-2 border rounded-md mt-1"><option>Tous</option><option>Almadies</option></select></div>
+          </div>
+          <div class="flex gap-2 justify-end mt-4"><button class="btn btn-ghost" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="createUser()">Créer</button></div>
+        </div>
+      </div>`;
+  } else if(key === 'modalAjoutEmploye'){
+    html = `
+      <div class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal-panel">
+          <div class="flex items-center justify-between mb-2"><h3 class="text-lg font-semibold">Ajouter un employé</h3><button onclick="closeModal()" class="btn btn-ghost btn-sm">✕</button></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div><label class="text-sm muted">Nom complet</label><input id="e_name" class="w-full p-2 border rounded-md mt-1" /></div>
+            <div><label class="text-sm muted">Téléphone</label><input id="e_tel" class="w-full p-2 border rounded-md mt-1" /></div>
+            <div><label class="text-sm muted">Magasin</label><select id="e_store" class="w-full p-2 border rounded-md mt-1"><option>Almadies</option></select></div>
+            <div><label class="text-sm muted">Rôle</label><select id="e_role" class="w-full p-2 border rounded-md mt-1"><option>Vendeur</option><option>Responsable</option></select></div>
+          </div>
+          <div class="flex gap-2 justify-end mt-4"><button class="btn btn-ghost" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="createEmployee()">Créer</button></div>
+        </div>
+      </div>`;
+  } else if(key === 'modalNouvelArrivage'){
+    html = `
+      <div class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal-panel">
+          <div class="flex items-center justify-between mb-2"><h3 class="text-lg font-semibold">Nouvel arrivage</h3><button onclick="closeModal()" class="btn btn-ghost btn-sm">✕</button></div>
+          <div><label class="text-sm muted">Fournisseur</label><input id="a_fourn" class="w-full p-2 border rounded-md mt-1" /></div>
+          <div class="mt-3"><label class="text-sm muted">Date</label><input id="a_date" type="date" class="w-full p-2 border rounded-md mt-1" /></div>
+          <div class="flex gap-2 justify-end mt-4"><button class="btn btn-ghost" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="saveArrivage()">Enregistrer</button></div>
+        </div>
+      </div>`;
+  } else {
+    html = `<div class="modal-backdrop" role="dialog" aria-modal="true"><div class="modal-panel"><div class="flex items-center justify-between mb-2"><h3 class="text-lg font-semibold">Info</h3><button onclick="closeModal()" class="btn btn-ghost btn-sm">✕</button></div><div class="muted">Modal non défini</div></div></div>`;
+  }
+  container.innerHTML = html;
+  container.setAttribute('aria-hidden','false');
+}
+
+function closeModal(){
+  const container = document.getElementById('modalContainer');
+  container.innerHTML = '';
+  container.setAttribute('aria-hidden','true');
+}
+
+/* ------------------------------
+  Populate UI tables & initialisation
+-------------------------------*/
+function populateProductsTable(){
+  const body = document.getElementById('productsTableBody');
+  const catalogue = document.getElementById('catalogueProduitsTableBody');
+  if(!body || !catalogue) return;
+  body.innerHTML = '';
+  catalogue.innerHTML = '';
+  productsData.forEach(p=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${p.name}</td><td class="text-right">${p.basePrice.toLocaleString('fr-FR')} CFA</td><td class="text-right"><input type="number" data-product="${p.id}" value="${p.basePrice}" class="p-1 border rounded-md text-right" /></td>`;
+    body.appendChild(tr);
+
+    const tr2 = document.createElement('tr');
+    tr2.innerHTML = `<td>${p.name}</td><td>${p.stockUnit}</td><td><span class="px-2 py-1 rounded-full text-xs" style="background:${p.priceType==='Variable'?'#fff7ed':'#f1f5f9'}">${p.priceType}</span></td><td class="text-center"><button class="text-blue-600 text-xs" onclick="openModal('modalAjoutProduit')">Détails</button></td>`;
+    catalogue.appendChild(tr2);
+  });
+}
+
+function populateUsersAndEmployees(){
+  const usersBody = document.getElementById('usersTableBody');
+  const empBody = document.getElementById('employeeTableBody');
+  const storesBody = document.getElementById('storesTableBody');
+  if(usersBody){ usersBody.innerHTML = ''; usersData.forEach(u=>{ const r = document.createElement('tr'); r.innerHTML = `<td>${u.name}</td><td>${u.login}</td><td>${u.role}</td><td>${u.store}</td><td class="text-center">${u.status}</td><td class="text-center"><button class="text-blue-600 text-xs" onclick="toast('Modifier')">Modifier</button></td>`; usersBody.appendChild(r); }); }
+  if(empBody){ empBody.innerHTML = ''; employeesData.forEach(e=>{ const r = document.createElement('tr'); r.innerHTML = `<td>${e.name}</td><td>${e.store}</td><td>${e.role}</td><td class="text-right">${e.salary.toLocaleString('fr-FR')} CFA</td><td class="text-center">${e.status}</td><td class="text-center"><button class="text-blue-600 text-xs" onclick="openModal('modalAjoutEmploye')">Détails</button></td>`; empBody.appendChild(r); }); }
+  if(storesBody){ storesBody.innerHTML=''; storesData.forEach(s=>{ const r = document.createElement('tr'); r.innerHTML = `<td>${s.name}</td><td>${s.type}</td><td>${s.address}</td><td class="text-center">${s.status}</td><td class="text-center"><button class="text-blue-600 text-xs" onclick="toast('Modifier magasin')">Modifier</button></td>`; storesBody.appendChild(r); }); }
+}
+
+/* ------------------------------
+  Sales entry helpers
+-------------------------------*/
+function ajouterLigneSaisie(){
+  const tbody = document.getElementById('saisieTableBody');
+  if(!tbody) return;
+  const tr = document.createElement('tr');
+  const select = document.createElement('select');
+  select.className = 'p-1 border rounded-md';
+  salesUnitsData.forEach(u=> select.add(new Option(`${u.name} (${u.baseProduct})`, u.id)));
+  select.onchange = ()=> updatePriceForRow(tr);
+  const tdProduct = document.createElement('td');
+  tdProduct.appendChild(select);
+  const tdPrice = document.createElement('td'); tdPrice.className='text-right';
+  const tdQty = document.createElement('td'); tdQty.className='text-center'; const qtyIn = document.createElement('input'); qtyIn.type='number'; qtyIn.value='1'; qtyIn.className='p-1 border rounded-md w-24 text-center'; qtyIn.oninput = ()=> calculateSubtotal(tr); tdQty.appendChild(qtyIn);
+  const tdSubtotal = document.createElement('td'); tdSubtotal.className='text-right font-medium';
+  const tdAction = document.createElement('td'); tdAction.className='text-center';
+  const delBtn = document.createElement('button'); delBtn.className='text-red-500'; delBtn.innerHTML='<i class="fa fa-trash"></i>'; delBtn.onclick = ()=> { tr.remove(); calculateTotal(); };
+  tdAction.appendChild(delBtn);
+  tr.appendChild(tdProduct); tr.appendChild(tdPrice); tr.appendChild(tdQty); tr.appendChild(tdSubtotal); tr.appendChild(tdAction);
+  tbody.appendChild(tr);
+  // init price
+  updatePriceForRow(tr);
+}
+
+function updatePriceForRow(tr){
+  const sel = tr.querySelector('select');
+  const pid = parseInt(sel.value);
+  const unit = salesUnitsData.find(s=>s.id===pid) || salesUnitsData[0];
+  tr.cells[1].textContent = unit.price.toLocaleString('fr-FR') + ' CFA';
+  calculateSubtotal(tr);
+}
+function calculateSubtotal(tr){
+  const price = parseFloat(tr.cells[1].textContent.replace(/\s|CFA/g,'')) || 0;
+  const qty = parseFloat(tr.cells[2].querySelector('input').value) || 0;
+  const subtotal = price * qty;
+  tr.cells[3].textContent = subtotal.toLocaleString('fr-FR') + ' CFA';
+  calculateTotal();
+}
+function calculateTotal(){
+  let total = 0;
+  document.querySelectorAll('#saisieTableBody tr').forEach(r=>{
+    const st = parseFloat(r.cells[3].textContent.replace(/\s|CFA/g,'')) || 0;
+    total += st;
+  });
+  document.getElementById('totalJournalier').textContent = total.toLocaleString('fr-FR') + ' CFA';
+}
+
+/* ------------------------------
+  Charts (Chart.js) sane defaults
+-------------------------------*/
+let charts = {};
+function renderCharts(){
+  // destroy existing
+  Object.values(charts).forEach(c=> c.destroy && c.destroy());
+  // CA chart
+  const caCtx = document.getElementById('caChart');
+  if(caCtx){
+    charts.caChart = new Chart(caCtx, { type:'bar', data:{ labels:['Almadies','Sandaga','Mermoz'], datasets:[{ label:'CA (x1000 CFA)', data:[850,720,650], backgroundColor:['#2563eb','#10b981','#f97316'] }]}, options:{ responsive:true, maintainAspectRatio:false } });
+  }
+  const prodCtx = document.getElementById('productPerfChart');
+  if(prodCtx){
+    charts.productPerfChart = new Chart(prodCtx, { type:'doughnut', data:{ labels:['Thon','Crevettes','Soles','Bars'], datasets:[{ data:[40,25,15,20], backgroundColor:['#ef4444','#f97316','#84cc16','#3b82f6'] }]}, options:{ responsive:true, maintainAspectRatio:false } });
+  }
+  const stockCtx = document.getElementById('stockDistributionChart');
+  if(stockCtx){
+    charts.stockDistributionChart = new Chart(stockCtx, { type:'pie', data:{ labels:['Hub','Almadies','Sandaga','En transit'], datasets:[{ data:[1200,450,380,75], backgroundColor:['#6b7280','#3b82f6','#10b981','#f59e0b'] }]}, options:{ responsive:true, maintainAspectRatio:false } });
+  }
+}
+
+/* ------------------------------
+  Simple router & sidebar logic
+-------------------------------*/
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=> v.classList.add('hidden'));
+  const el = document.getElementById(id);
+  if(el) el.classList.remove('hidden');
+  // ensure charts rendered on view switch
+  setTimeout(renderCharts, 80);
+}
+function navigateTo(id){ showView(id); window.scrollTo({top:0,behavior:'smooth'}); }
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  // populate initial UI
+  populateProductsTable();
+  populateUsersAndEmployees();
+  // initial sales rows
+  ajouterLigneSaisie(); ajouterLigneSaisie();
+  // charts
+  renderCharts();
+  // setup sidebar nav
+  document.querySelectorAll('.nav-link').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      document.querySelectorAll('.nav-link').forEach(n=> n.classList.remove('active'));
+      a.classList.add('active');
+      const view = a.getAttribute('data-view');
+      if(view) showView(view);
+      // close mobile sidebar if open
+      document.getElementById('sidebar').classList.remove('open');
+    });
+  });
+
+  // mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  menuToggle.addEventListener('click', ()=>{
+    const sb = document.getElementById('sidebar');
+    sb.classList.toggle('open');
+  });
+
+  // role switch
+  document.getElementById('roleSwitch').addEventListener('click', ()=>{
+    const label = document.getElementById('currentUserLabel');
+    const isDirector = label.textContent.includes('Directeur');
+    if(isDirector){
+      label.textContent = 'Vue: Gérant (Almadies)';
+      // simulate store view
+      document.querySelectorAll('.nav-link').forEach(n=> n.classList.remove('active'));
+      showView('store-dashboard');
+    } else {
+      label.textContent = 'Vue: Directeur';
+      document.querySelectorAll('.nav-link').forEach(n=> n.classList.remove('active'));
+      document.querySelector('.nav-link[data-view="director-dashboard"]').classList.add('active');
+      showView('director-dashboard');
+    }
+  });
+
+  // logout (simple)
+  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+    toast('Déconnexion (simulée)');
+  });
+
+  // small tab controls (stock)
+  document.querySelectorAll('[data-tab]').forEach(btn=>{
+    btn.addEventListener('click', ()=> {
+      document.querySelectorAll('.tab-content').forEach(t=> t.classList.add('hidden'));
+      const id = btn.getAttribute('data-tab');
+      const node = document.getElementById(id);
+      if(node) node.classList.remove('hidden');
+    });
+  });
+  // admin tab controls
+  document.querySelectorAll('[data-tab-admin]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.admin-tab').forEach(t=> t.classList.add('hidden'));
+      const id = btn.getAttribute('data-tab-admin');
+      const node = document.getElementById(id);
+      if(node) node.classList.remove('hidden');
+    });
+  });
+
+});
+
+/* ------------------------------
+  Minimal CRUD helpers used by modals
+-------------------------------*/
+function createProduct(){
+  const name = document.getElementById('newProductName').value || 'Produit';
+  productsData.push({ id:productsData.length+1, name, stockUnit:'kg', priceType:'Variable', basePrice:1000 });
+  populateProductsTable();
+  closeModal();
+  toast('Produit ajouté');
+}
+function createUser(){
+  const name = document.getElementById('u_name').value || 'Utilisateur';
+  const login = document.getElementById('u_login').value || `u${Date.now()}`;
+  usersData.push({ id:usersData.length+1, name, login, role:document.getElementById('u_role').value, store:document.getElementById('u_store').value, status:'Actif' });
+  populateUsersAndEmployees();
+  closeModal();
+  toast('Utilisateur créé');
+}
+function createEmployee(){
+  const name = document.getElementById('e_name').value || 'Employé';
+  employeesData.push({ id:employeesData.length+1, name, store:'Almadies', role:document.getElementById('e_role').value, salary:0, status:'Actif' });
+  populateUsersAndEmployees();
+  closeModal();
+  toast('Employé créé');
+}
+function saveArrivage(){
+  const f = document.getElementById('a_fourn').value || 'Fournisseur';
+  closeModal();
+  toast('Arrivage enregistré');
+}
+function validerNouveauxPrix(){
+  toast('Nouveaux prix appliqués');
+}
+
+/* ------------------------------
+  Small accessibility helpers
+-------------------------------*/
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape') closeModal();
+});
+</script>
+
+</body>
+</html>

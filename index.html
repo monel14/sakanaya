@@ -1,22 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sakanaya - Système de Gestion</title>
-  
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/placeholder-logo.svg" />
-  
-  <!-- Meta tags pour PWA -->
-  <meta name="theme-color" content="#0ea5e9" />
-  <meta name="description" content="Système de gestion pour poissonnerie" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sakanaya — V4 Refonte</title>
+    <meta name="description" content="Refonte UI/UX Sakanaya — tableau de bord, gestion stocks, ventes" />
+    <!-- Tailwind CDN (play) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: 'var(--primary)',
+            'primary-light': 'var(--primary-light)',
+            'primary-dark': 'var(--primary-dark)',
+            'primary-text-on-light': 'var(--primary-text-on-light)',
+
+            accent: 'var(--accent)',
+            'accent-light': 'var(--accent-light)',
+            'accent-dark': 'var(--accent-dark)',
+            
+            success: 'var(--success)',
+            'success-light': 'var(--success-light)',
+            'success-dark': 'var(--success-dark)',
+            
+            danger: 'var(--danger)',
+            'danger-light': 'var(--danger-light)',
+            'danger-dark': 'var(--danger-dark)',
+
+            warn: 'var(--warn)',
+            'warn-light': 'var(--warn-light)',
+            'warn-dark': 'var(--warn-dark)',
+            
+            'bg-main': 'var(--bg-main)',
+            'bg-subtle': 'var(--bg-subtle)',
+            surface: 'var(--surface)',
+
+            'text-main': 'var(--text-main)',
+            'text-secondary': 'var(--text-secondary)',
+            'text-muted': 'var(--text-muted)',
+
+            'border-color': 'var(--border-color)',
+          }
+        }
+      }
+    }
+    </script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css" />
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0-rc-f994737d14-20240522",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0-rc-f994737d14-20240522/client",
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "@google/genai": "https://esm.sh/@google/genai"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
 </head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
 </body>
 </html>
